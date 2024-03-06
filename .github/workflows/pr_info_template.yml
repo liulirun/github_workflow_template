@@ -1,0 +1,34 @@
+name: PR Info template
+
+on:
+  workflow_call:
+
+jobs:
+  print_debug_info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test_pr_link
+        env:
+           CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
+           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "CLICKUP_TOKEN=$CLICKUP_TOKEN"
+          echo "GH_TOKEN=$GH_TOKEN"
+
+          CLICKUP_PR_FIELD_ID="68107229-c64e-48fe-8554-11eb32a00f33"
+          CLICKUP_TEAM_ID="45031420"
+          CLICKUP_API_PREFIX="https://api.clickup.com/api/v2/task"
+          CLICKUP_PREFIX="https://app.clickup.com/t"
+          
+          clickup_id="WS-8827"
+
+          clickup_api_url="$CLICKUP_API_PREFIX/$clickup_id?custom_task_ids=true&team_id=$CLICKUP_TEAM_ID"
+          echo $clickup_api_url
+
+          clickup_res=$(curl -s -X GET "$clickup_api_url" \
+                          -H 'Content-Type: application/json' \
+                          -H "Authorization: $CLICKUP_TOKEN"
+                      )
+          id=$(echo $clickup_res | jq -r '.id')
+          echo $id
+          echo "done"
