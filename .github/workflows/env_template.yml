@@ -1,13 +1,13 @@
-name: print env template
+name: template_env
 
 on:
   workflow_call:
 
 jobs:
-  print_evn_info:
+  print_env:
     runs-on: ubuntu-latest
     steps:
-      - name: template_print_github_event_info
+      - name: github env
         env:
           PR_CONTEXT: ${{ toJSON(github.event.pull_request) }}
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
