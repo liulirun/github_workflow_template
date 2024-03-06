@@ -1,13 +1,13 @@
-name: PR Info template
+name: template_clickup_task
 
 on:
   workflow_call:
 
 jobs:
-  print_debug_info:
+  clickup_task:
     runs-on: ubuntu-latest
     steps:
-      - name: test_pr_link
+      - name: get clickup task
         env:
            CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
         run: |
