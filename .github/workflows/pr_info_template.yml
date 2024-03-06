@@ -10,10 +10,8 @@ jobs:
       - name: test_pr_link
         env:
            CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
-           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "CLICKUP_TOKEN=$CLICKUP_TOKEN"
-          echo "GH_TOKEN=$GH_TOKEN"
 
           CLICKUP_PR_FIELD_ID="68107229-c64e-48fe-8554-11eb32a00f33"
           CLICKUP_TEAM_ID="45031420"
